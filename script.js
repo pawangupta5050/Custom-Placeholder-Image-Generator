@@ -8,7 +8,7 @@ const image = document.querySelector('img')
 const copyURL = document.querySelector('.fa-solid')
 
 const removeHashTag = (str) => {
-    return str.replace("#","")
+    return str.replace("#", "")
 }
 
 const addPlus = (str) => {
@@ -27,7 +27,7 @@ const createURL = () => {
     textArea.value = URL
     image.src = URL
     console.log(image)
-    
+
     copyURL.classList.remove('fa-check')
     copyURL.classList.add('fa-clipboard')
 }
@@ -39,17 +39,21 @@ inputAll.forEach((input) => {
 selectDimension.addEventListener('change', createURL)
 
 copyURL.addEventListener('click', () => {
-    if(textArea.value){
+    if (textArea.value) {
         navigator.clipboard.writeText(textArea.value)
-        .then(() => {
-            console.log('Text copied to clipboard');
-        })
-        .catch(err => {
-            console.error('Error copying text: ', err);
-        });
+            .then(() => {
+                console.log('Text copied to clipboard');
+            })
+            .catch(err => {
+                console.error('Error copying text: ', err);
+            });
 
         copyURL.classList.remove('fa-clipboard')
         copyURL.classList.add('fa-check')
+        setTimeout(() => {
+            copyURL.classList.remove('fa-check')
+            copyURL.classList.add('fa-clipboard')
+        }, 3000)
     }
 })
 
